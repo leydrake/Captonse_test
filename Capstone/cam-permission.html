@@ -12,6 +12,11 @@
 <body>
   <div class="container">
 
+    <!-- Distance display -->
+    <div id="distanceDisplay" style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); color: #00FF00; padding: 10px 20px; border-radius: 20px; font-size: 18px; font-weight: bold; z-index: 1000; display: none;">
+      Distance: <span id="currentDistance">Calculating...</span>
+    </div>
+
     <div class="camera-area">
       <div class="camera-icon" id="cameraIcon">
         <!-- Disabled camera SVG icon -->
@@ -26,6 +31,11 @@
         </svg>
       </div>
       <video id="cameraVideo" autoplay playsinline style="display: none; width: 100%; height: 100%; object-fit: cover; border-radius: 12px;"></video>
+      
+      <!-- Test distance button -->
+      <button id="testDistanceBtn" style="position: absolute; top: 10px; right: 10px; z-index: 1001; padding: 8px 12px; background: #007bff; color: white; border: none; border-radius: 4px; font-size: 12px; display: none;">
+        Test Distance
+      </button>
     </div>
     <div class="bottom-card">
       <div class="debug-info" style="font-size: 12px; color: #666; margin-bottom: 10px; text-align: center;">
@@ -54,6 +64,7 @@
     const msgDiv = document.querySelector('.permission-msg');
     const cameraIcon = document.querySelector('#cameraIcon');
     const cameraVideo = document.querySelector('#cameraVideo');
+    const testDistanceBtn = document.querySelector('#testDistanceBtn');
     let stream = null;
 
     grantBtn.addEventListener('click', async function() {
@@ -96,6 +107,12 @@
         cameraIcon.style.display = 'none';
         cameraVideo.style.display = 'block';
         cameraVideo.srcObject = stream;
+        
+        // Show test distance button
+        const testDistanceBtn = document.querySelector('#testDistanceBtn');
+        if (testDistanceBtn) {
+          testDistanceBtn.style.display = 'block';
+        }
         
         // Update button and message
         grantBtn.innerHTML = `
@@ -140,6 +157,19 @@
       }
     });
 
+    // Test distance button event listener
+    if (testDistanceBtn) {
+      testDistanceBtn.addEventListener('click', function() {
+        console.log('Test distance button clicked');
+        // Force a distance update
+        if (typeof updateDistance === 'function') {
+          updateDistance();
+        } else {
+          console.log('updateDistance function not available yet');
+        }
+      });
+    }
+
     async function tryBasicCamera() {
       try {
         console.log('Trying basic camera constraints...');
@@ -153,6 +183,12 @@
         cameraIcon.style.display = 'none';
         cameraVideo.style.display = 'block';
         cameraVideo.srcObject = stream;
+        
+        // Show test distance button
+        const testDistanceBtn = document.querySelector('#testDistanceBtn');
+        if (testDistanceBtn) {
+          testDistanceBtn.style.display = 'block';
+        }
         
         // Update button and message
         grantBtn.innerHTML = `
@@ -213,13 +249,28 @@
           <a-text
             id="distanceText"
             value="Calculating distance..."
-            position="0 1.2 -1"
-            scale="0.4 0.4 0.4"
+            position="0 1.5 -1"
+            scale="0.6 0.6 0.6"
             color="#00FF00"
             align="center"
             gps-entity-place="latitude: 14.914737810353634; longitude: 120.87128096439201;"
             gps-entity-place-lock="true"
             look-at="[gps-camera]"
+            material="shader: flat"
+          ></a-text>
+          
+          <!-- Backup distance display (always visible) -->
+          <a-text
+            id="backupDistanceText"
+            value="Distance: Loading..."
+            position="0 2 -1"
+            scale="0.4 0.4 0.4"
+            color="#FFFF00"
+            align="center"
+            gps-entity-place="latitude: 14.914737810353634; longitude: 120.87128096439201;"
+            gps-entity-place-lock="true"
+            look-at="[gps-camera]"
+            material="shader: flat"
           ></a-text>
           
           <!-- Text label that follows the marker -->
@@ -263,6 +314,8 @@
       const targetLat = 14.914737810353634;
       const targetLng = 120.87128096439201;
       
+      console.log('Starting distance calculation to:', targetLat, targetLng);
+      
       // Function to calculate distance between two GPS coordinates
       function calculateDistance(lat1, lon1, lat2, lon2) {
         const R = 6371; // Earth's radius in kilometers
@@ -279,12 +332,17 @@
       
       // Function to update distance display
       function updateDistance() {
+        console.log('Updating distance...');
+        
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(
             function(position) {
               const currentLat = position.coords.latitude;
               const currentLng = position.coords.longitude;
               const distance = calculateDistance(currentLat, currentLng, targetLat, targetLng);
+              
+              console.log('Current position:', currentLat, currentLng);
+              console.log('Calculated distance:', distance);
               
               // Format distance display
               let distanceText = '';
@@ -294,10 +352,22 @@
                 distanceText = `${distance.toFixed(2)}km away`;
               }
               
+              console.log('Distance text:', distanceText);
+              
               // Update the distance text in the AR scene
               const distanceElement = document.querySelector('#distanceText');
+              const backupDistanceElement = document.querySelector('#backupDistanceText');
+              
               if (distanceElement) {
                 distanceElement.setAttribute('value', distanceText);
+                console.log('Updated distance element with:', distanceText);
+              } else {
+                console.error('Distance element not found!');
+              }
+              
+              if (backupDistanceElement) {
+                backupDistanceElement.setAttribute('value', `Distance: ${distanceText}`);
+                console.log('Updated backup distance element with:', distanceText);
               }
               
               // Also update the debug info
@@ -305,12 +375,20 @@
               if (deviceInfo) {
                 deviceInfo.textContent = `Distance: ${distanceText}`;
               }
+              
+              // Update the visible HTML distance display
+              const distanceDisplay = document.querySelector('#distanceDisplay');
+              const currentDistanceSpan = document.querySelector('#currentDistance');
+              if (distanceDisplay && currentDistanceSpan) {
+                currentDistanceSpan.textContent = distanceText;
+                distanceDisplay.style.display = 'block';
+              }
             },
             function(error) {
               console.error('Error getting current position:', error);
               const distanceElement = document.querySelector('#distanceText');
               if (distanceElement) {
-                distanceElement.setAttribute('value', 'GPS unavailable');
+                distanceElement.setAttribute('value', 'GPS Error: ' + error.message);
               }
             },
             {
@@ -319,12 +397,21 @@
               maximumAge: 60000
             }
           );
+        } else {
+          console.error('Geolocation not supported');
+          const distanceElement = document.querySelector('#distanceText');
+          if (distanceElement) {
+            distanceElement.setAttribute('value', 'GPS not supported');
+          }
         }
       }
       
-      // Update distance immediately and then every 3 seconds
-      updateDistance();
-      setInterval(updateDistance, 3000);
+      // Wait a bit for the AR scene to fully load before starting updates
+      setTimeout(() => {
+        console.log('Starting distance updates...');
+        updateDistance();
+        setInterval(updateDistance, 3000);
+      }, 2000);
     }
 
     // Clean up stream when page is unloaded
