@@ -232,9 +232,9 @@
           arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false; sourceWidth: 1280; sourceHeight: 720; displayWidth: 1280; displayHeight: 720;"
           renderer="logarithmicDepthBuffer: true;"
         >
-          <!-- Fixed GPS marker that won't drag -->
+          <!-- GPS marker that stays at actual coordinates -->
           <a-box
-            position="0 0 -1"
+            position="0 0 0"
             rotation="0 0 0"
             width="0.5"
             height="0.5"
@@ -243,29 +243,16 @@
             gps-entity-place="latitude: 14.914737810353634; longitude: 120.87128096439201;"
             gps-entity-place-lock="true"
             material="shader: flat"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 5000"
           ></a-box>
           
-          <!-- Distance display above the marker -->
+          <!-- Distance display that follows the marker -->
           <a-text
             id="distanceText"
             value="Calculating distance..."
-            position="0 1.5 -1"
-            scale="0.6 0.6 0.6"
-            color="#00FF00"
-            align="center"
-            gps-entity-place="latitude: 14.914737810353634; longitude: 120.87128096439201;"
-            gps-entity-place-lock="true"
-            look-at="[gps-camera]"
-            material="shader: flat"
-          ></a-text>
-          
-          <!-- Backup distance display (always visible) -->
-          <a-text
-            id="backupDistanceText"
-            value="Distance: Loading..."
-            position="0 2 -1"
+            position="0 0.8 0"
             scale="0.4 0.4 0.4"
-            color="#FFFF00"
+            color="#00FF00"
             align="center"
             gps-entity-place="latitude: 14.914737810353634; longitude: 120.87128096439201;"
             gps-entity-place-lock="true"
@@ -276,13 +263,14 @@
           <!-- Text label that follows the marker -->
           <a-text
             value="Target Location"
-            position="0 0.8 -1"
+            position="0 -0.8 0"
             scale="0.3 0.3 0.3"
             color="#FFFFFF"
             align="center"
             gps-entity-place="latitude: 14.914737810353634; longitude: 120.87128096439201;"
             gps-entity-place-lock="true"
             look-at="[gps-camera]"
+            material="shader: flat"
           ></a-text>
           
           <!-- GPS Camera with proper configuration -->
@@ -356,18 +344,12 @@
               
               // Update the distance text in the AR scene
               const distanceElement = document.querySelector('#distanceText');
-              const backupDistanceElement = document.querySelector('#backupDistanceText');
               
               if (distanceElement) {
                 distanceElement.setAttribute('value', distanceText);
                 console.log('Updated distance element with:', distanceText);
               } else {
                 console.error('Distance element not found!');
-              }
-              
-              if (backupDistanceElement) {
-                backupDistanceElement.setAttribute('value', `Distance: ${distanceText}`);
-                console.log('Updated backup distance element with:', distanceText);
               }
               
               // Also update the debug info
