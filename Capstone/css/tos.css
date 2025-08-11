@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+body {
+    background-color: #faf7f2;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    
+}
+.tos-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    background-color: #1B5F30;
+    width: 100%;
+    color: #fff;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.tos-header a {
+    position: absolute;
+    left: 10px;
+}
+.tos-header img {
+    width: 30px;
+    height: 30px;
+    filter: brightness(0) invert(1);
+   
+}
+.tos-title {
+    font-weight: 500;
+    margin-left: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.5rem
+}
+.tos-content {
+  padding: 28px 28px 24px 28px;
+  overflow-y: auto;
+  flex: 1 1 auto;
+  font-size: 1rem;
+  color: #222;
+ 
+  padding-bottom: 100px; /* Adjust this value to match or slightly exceed the height of .tos-footer */
+  padding-left: 24px;
+  padding-right: 24px;
+}
+.tos-content h3 {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  font-size: 1.08em;
+}
+.tos-content p {
+  margin: 0 0 1em 0;
+  line-height: 1.6;
+}
+.tos-content ul {
+  margin: 0 0 1em 1.5em;
+  padding-left: 1.2em;
+}
+.tos-content li {
+  margin-bottom: 0.5em;
+}
+@media (max-width: 600px) {
+  .tos-content {
+    padding: 18px 8px 16px 8px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+}
+.tos-footer {
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    background: #faf7f3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 100;
+    padding-top: 10px;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
+
+  }
+
+  .agree-btn {
+    background: #1b5f30;
+    color: #fff;
+    font-size: 1.5rem;
+   
+    border: none;
+    border-radius: 10px;
+    padding: 16px 0px;
+    width: 90%;
+    max-width: 420px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    transition: background 0.2s;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
+
+  }
+  .agree-btn:hover {
+    background: #3e774f;
+  }

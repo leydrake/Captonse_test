@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Location</title>
+    <link rel="stylesheet" href="css/add-location.css">
+</head>
+<body>
+    <div class="add-location-container">
+        <div class="add-location-header">
+            <button class="back-btn" aria-label="Back" onclick="goBackToAdminTools()">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                    <path d="M15 18l-6-6 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <span class="add-location-title">Add Location</span>
+        </div>
+        <div class="image-upload-area">
+            <input type="file" id="location-image" accept="image/*" hidden />
+            <label for="location-image" class="image-upload-label">
+                <svg width="56" height="56" viewBox="0 0 24 24" fill="none">
+                    <rect x="2" y="2" width="20" height="20" rx="4" fill="#d3d3d3"/>
+                    <path d="M8 15l2.5-3 2.5 3 3.5-4.5L20 17H4l4-5z" stroke="#206233" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="9" cy="9" r="2" stroke="#206233" stroke-width="2"/>
+                </svg>
+            </label>
+        </div>
+        <div class="location-form-area">
+            <form class="location-form">
+                <label for="location-name">Location Name</label>
+                <input type="text" id="location-name" name="location-name" required />
+                <label for="location-description">Description</label>
+                <input type="text" id="location-description" name="location-description" />
+                <div class="ar-path-btns">
+                    <button type="button" class="ar-path-btn">Record AR Path</button>
+                    <button type="button" class="ar-path-btn">Reset AR Path</button>
+                </div>
+            </form>
+        </div>
+        <button class="save-changes-btn">Save Changes</button>
+    </div>
+    <script>
+
+    
+        function goBackToAdminTools(){
+            window.location.href = "./admin-tools.html"
+        }
+    </script>
+</body>
+</html>

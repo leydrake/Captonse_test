@@ -1,0 +1,316 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    background: #d3d3d3;
+    font-family: Arial, sans-serif;
+    height: 100%;
+}
+
+.events-admin-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background: #fcf9f5;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.events-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    background: #206233;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 0 10px 10px;
+    height: 60px;
+    z-index: 1000;
+}
+
+.back-btn {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: #fff;
+    padding: 0;
+}
+
+.events-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.search-bar {
+    margin-top: 80px;
+    width: 90%;
+    max-width: 400px;
+    display: flex;
+    align-items: center;
+    background: #e0e0e0;
+    border-radius: 8px;
+    padding: 6px 14px;
+    box-sizing: border-box;
+    gap: 8px;
+}
+
+.search-bar input {
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    outline: none;
+    width: 100%;
+    color: #444;
+}
+
+.search-icon {
+    min-width: 24px;
+    min-height: 24px;
+}
+
+.events-list {
+    margin-top: 18px;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    overflow-y: auto;
+    height: calc(100vh - 220px);
+    padding-bottom: 10px;
+}
+
+.event-card {
+    width: 90%;
+    background: #e0e0e0;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    box-sizing: border-box;
+    font-size: 16px;
+    color: #206233;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    position: relative;
+}
+
+.event-img-placeholder {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f0f0f0;
+    border-radius: 8px;
+}
+
+.event-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.event-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #222;
+}
+
+.event-location, .event-distance {
+    font-size: 14px;
+    color: #222;
+}
+
+.event-edit-btn, .event-delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    margin-left: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.event-edit-btn svg, .event-delete-btn svg {
+    display: block;
+}
+
+.event-edit-btn:hover svg path,
+.event-edit-btn:focus svg path {
+    stroke: #174b25;
+}
+
+.event-delete-btn:hover svg path,
+.event-delete-btn:focus svg path {
+    stroke: #b00020;
+}
+
+.add-event-btn {
+    width: 90%;
+    max-width: 400px;
+    margin: 18px 0 0 0;
+    background: #206233;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 16px 0;
+    font-size: 22px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+    position: fixed;
+    left: 50%;
+    bottom: 24px;
+    transform: translateX(-50%);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.add-event-btn:hover {
+    background: #174b25;
+}
+
+/* Custom scrollbar */
+.events-list::-webkit-scrollbar {
+    width: 8px;
+    background: #f0ede7;
+    border-radius: 8px;
+}
+.events-list::-webkit-scrollbar-thumb {
+    background: #d3d3d3;
+    border-radius: 8px;
+}
+
+/* Modal styles */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+.modal-content {
+    background: #fff;
+    border-radius: 16px;
+    padding: 32px 28px 24px 28px;
+    min-width: 340px;
+    max-width: 95vw;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    position: relative;
+}
+.modal-content h2 {
+    margin: 0 0 18px 0;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #206233;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+.modal-content label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 14px;
+    font-size: 1rem;
+}
+#imagePreview {
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-top: 4px;
+}
+#eventLocation {
+    height: 44px;
+    font-size: 1rem;
+    border: none;
+    background: #e0e0e0;
+    border-radius: 8px;
+    padding: 0 14px;
+    outline: none;
+    box-sizing: border-box;
+    margin-top: 2px;
+    color: #444;
+    transition: box-shadow 0.2s;
+}
+#eventLocation:focus {
+    box-shadow: 0 0 0 2px #20623333;
+}
+#eventTitle {
+    height: 44px;
+    font-size: 1rem;
+    border: none;
+    background: #e0e0e0;
+    border-radius: 8px;
+    padding: 0 14px;
+    outline: none;
+    box-sizing: border-box;
+    margin-top: 2px;
+    color: #444;
+    transition: box-shadow 0.2s;
+}
+#eventTitle:focus {
+    box-shadow: 0 0 0 2px #20623333;
+}
+.dropdown-list {
+    position: absolute;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-top: 2px;
+    width: 90%;
+    max-width: 95%;
+    max-height: 140px;
+    overflow-y: auto;
+    z-index: 2100;
+    list-style: none;
+    padding: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.dropdown-list li {
+    padding: 10px 14px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+.dropdown-list li:hover {
+    background: #e0e0e0;
+}
+.modal-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: flex-end;
+    margin-top: 12px;
+}
+.modal-actions button {
+    padding: 8px 22px;
+    border-radius: 8px;
+    border: none;
+    background: #216a39;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.modal-actions button#closeModalBtn {
+    background: #bbb;
+    color: #222;
+}
+.modal-actions button:hover {
+    background: #174c28;
+}

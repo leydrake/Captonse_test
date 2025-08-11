@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select a campus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">  
+  <link rel="stylesheet" href="./css/select-campus.css">
+   
+</head>
+<body>
+   <div class="container">
+      <div class="header">
+        <a href="tos.html" class="back-arrow">
+          <!-- Inline SVG for a white arrow (no image file needed) -->
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+            <path d="M15 18l-6-6 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        
+      </div>
+
+      <div class="content">
+        <h2 class="select-title">Select a campus</h2>
+        
+        <div class="campus-card">
+          <div class="campus-img">
+            <img src="/images/placeholder.png" alt="Bustos Campus">
+          </div>
+          <span class="campus-name">Bustos Campus</span>
+        </div>
+        <div class="campus-card">
+          <div class="campus-img">
+            <img src="/images/placeholder.png" alt="Main Campus">
+          </div>
+          <span class="campus-name">Main Campus</span>
+        </div>
+        <div class="campus-card">
+          <div class="campus-img">
+            <img src="/images/placeholder.png" alt="Sarmiento Campus">
+          </div>
+          <span class="campus-name">Sarmiento Campus</span>
+        </div>
+      </div>
+      
+      <div class="footer">
+        <button class="next-btn" onclick="goToPermission()">Next</button>
+      </div>
+    
+   </div>
+
+   <script>
+    function backToTOS() {
+      window.location.href = 'tos.html';
+    }
+    function goToPermission() {
+      window.location.href = 'cam-permission.html';
+    }
+  </script>
+  <script>
+    // Select all campus cards
+    const cards = document.querySelectorAll('.campus-card');
+    cards.forEach(card => {
+      card.addEventListener('click', function() {
+        // Remove 'selected' from all cards
+        cards.forEach(c => c.classList.remove('selected'));
+        // Add 'selected' to the clicked card
+        this.classList.add('selected');
+      });
+    });
+  </script>
+</body>
+</html>

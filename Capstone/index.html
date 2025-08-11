@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=375, initial-scale=1.0">
+  <title>Start Page</title>
+ 
+
+  <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+  <!-- Side Panel -->
+  <div class="side-panel" id="sidePanel">
+    <div class="panel-header">
+      <h2>Menu</h2>
+      <button class="close-btn" onclick="closePanel()">×</button>
+    </div>
+    <div class="panel-content">
+      <div class="menu-item" onclick="goToAdmin()">
+        <span>Admin Panel</span>
+        <img src="./icons/arrow-left.png" alt="arrow" class="menu-arrow">
+      </div>
+    </div>
+  </div>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay" onclick="closePanel()"></div>
+
+  <div class="container">
+   <div class="campus-logo">
+    <img src="./images/bulsu-bustos-logo.png" alt="University Logo" class="logo">
+   </div>
+   <div class="ar-logo">
+    <img src="./images/AR-logo.png" alt="AR Logo" class="ar-logo">
+   </div>
+   <div class="title">
+    <h1>Navigate My Campus</h1>
+   </div>
+  </div>
+  <div class="footer-nav">
+    <button class="start-btn" onclick="goToTOS()">Start Navigation</button>
+    <div class="tos-message">Please read TOS to proceed.</div>
+  </div>
+  
+  <script>
+    // Touch/swipe variables
+    let startX = 0;
+    let startY = 0;
+    let endX = 0;
+    let endY = 0;
+    let isSwiping = false;
+
+    // Panel functions
+    function openPanel() {
+      document.getElementById('sidePanel').classList.add('open');
+      document.getElementById('overlay').classList.add('active');
+    }
+
+    function closePanel() {
+      document.getElementById('sidePanel').classList.remove('open');
+      document.getElementById('overlay').classList.remove('active');
+    }
+
+    // Navigation functions
+    function goToTOS() {
+      window.location.href = 'tos.html';
+    }
+
+    function goToAdmin() {
+      window.location.href = 'admin/index.html';
+    }
+
+    // Touch event handlers
+    document.addEventListener('touchstart', function(e) {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      isSwiping = false;
+    });
+
+    document.addEventListener('touchmove', function(e) {
+      if (!isSwiping) {
+        endX = e.touches[0].clientX;
+        endY = e.touches[0].clientY;
+        
+        const deltaX = endX - startX;
+        const deltaY = endY - startY;
+        
+        // Check if it's a horizontal swipe (more horizontal than vertical)
+        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+          isSwiping = true;
+          
+          // Swipe left to right to open panel
+          if (deltaX > 0) {
+            openPanel();
+          }
+        }
+      }
+    });
+
+    document.addEventListener('touchend', function(e) {
+      isSwiping = false;
+    });
+
+    // Mouse event handlers for desktop testing
+    document.addEventListener('mousedown', function(e) {
+      startX = e.clientX;
+      startY = e.clientY;
+      isSwiping = false;
+    });
+
+    document.addEventListener('mousemove', function(e) {
+      if (!isSwiping) {
+        endX = e.clientX;
+        endY = e.clientY;
+        
+        const deltaX = endX - startX;
+        const deltaY = endY - startY;
+        
+        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 100) {
+          isSwiping = true;
+          
+          if (deltaX < 0) {
+            openPanel();
+          }
+        }
+      }
+    });
+
+    document.addEventListener('mouseup', function(e) {
+      isSwiping = false;
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Destination</title>
+    <link rel="stylesheet" href="./css/change-destination.css">
+    <link rel="stylesheet" href="../css/index.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="events-header">
+                <button class="back-btn" aria-label="Back" onclick="goBackToAdminTools()">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                        <path d="M15 18l-6-6 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+              
+            </div>
+            <h1>Edit Destination</h1>
+        </header>
+        <div class="search-bar">
+            <input type="text" placeholder="Search Destination" />
+        </div>
+        <div class="destination-list">
+            <div class="destination-item">
+                <img class="destination-img" src="../images/bulsu-bustos-logo.png" alt="Admin Building">
+                <div class="destination-info">
+                    <span class="destination-name">Admin Building</span>
+                    <span class="destination-distance">Distance<br><b>2 M</b></span>
+                </div>
+                <div class="destination-actions">
+                    <button class="edit-btn" aria-label="Edit"><span>&#9998;</span></button>
+                    <button class="delete-btn" aria-label="Delete"><span>&#128465;</span></button>
+                </div>
+            </div>
+            <div class="destination-item">
+                <img class="destination-img" src="../images/bulsu-bustos.png" alt="Activity Center">
+                <div class="destination-info">
+                    <span class="destination-name">Activity Center</span>
+                    <span class="destination-distance">Distance<br><b>2 M</b></span>
+                </div>
+                <div class="destination-actions">
+                    <button class="edit-btn" aria-label="Edit"><span>&#9998;</span></button>
+                    <button class="delete-btn" aria-label="Delete"><span>&#128465;</span></button>
+                </div>
+            </div>
+            <div class="destination-item">
+                <img class="destination-img" src="../images/bulsu-bustos-logo.png" alt="MPG Building">
+                <div class="destination-info">
+                    <span class="destination-name">MPG Building</span>
+                    <span class="destination-distance">Distance<br><b>2 M</b></span>
+                </div>
+                <div class="destination-actions">
+                    <button class="edit-btn" aria-label="Edit"><span>&#9998;</span></button>
+                    <button class="delete-btn" aria-label="Delete"><span>&#128465;</span></button>
+                </div>
+            </div>
+            <div class="destination-item">
+                <img class="destination-img" src="../images/bulsu-bustos.png" alt="BSBA Building">
+                <div class="destination-info">
+                    <span class="destination-name">BSBA Building</span>
+                    <span class="destination-distance">Distance<br><b>2 M</b></span>
+                </div>
+                <div class="destination-actions">
+                    <button class="edit-btn" aria-label="Edit"><span>&#9998;</span></button>
+                    <button class="delete-btn" aria-label="Delete"><span>&#128465;</span></button>
+                </div>
+            </div>
+            <div class="destination-item">
+                <img class="destination-img" src="../images/bulsu-bustos-logo.png" alt="Pancho Hall">
+                <div class="destination-info">
+                    <span class="destination-name">Pancho Hall</span>
+                    <span class="destination-distance">Distance<br><b>2 M</b></span>
+                </div>
+                <div class="destination-actions">
+                    <button class="edit-btn" aria-label="Edit"><span>&#9998;</span></button>
+                    <button class="delete-btn" aria-label="Delete"><span>&#128465;</span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>            
+        function goBackToAdminTools(){
+            window.location.href = "./admin-tools.html"
+        }
+    </script>
+</body>
+</html>

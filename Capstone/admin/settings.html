@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Settings</title>
+    <link rel="stylesheet" href="css/settings.css">
+</head>
+<body>
+    <div class="admin-settings-container">
+        <div class="settings-header">
+            <button class="back-btn" aria-label="Back" onclick="goBackToAdminTools()">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                    <path d="M15 18l-6-6 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <span class="settings-title">Admin Settings</span>
+        </div>
+
+        <div class="settings-content">
+            <!-- Tab Navigation -->
+            <div class="settings-tabs">
+                <button class="tab-btn active" data-tab="account">Account</button>
+                <button class="tab-btn" data-tab="events">Events</button>
+                <button class="tab-btn" data-tab="appearance">Appearance</button>
+                <button class="tab-btn" data-tab="security">Security</button>
+                <button class="tab-btn" data-tab="notifications">Notifications</button>
+                <button class="tab-btn" data-tab="about">About</button>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="tab-content">
+                <!-- Account Tab -->
+                <div id="account" class="tab-panel active">
+                    <h3>Account Management</h3>
+                    <form id="accountForm" class="settings-form">
+                        <div class="form-group">
+                            <label>Admin Email</label>
+                            <input type="email" id="adminEmail" placeholder="admin@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Current Password</label>
+                            <div class="password-input-container">
+                                <input type="password" id="currentPassword" placeholder="Enter current password">
+                                <button type="button" class="password-toggle" onclick="togglePasswordVisibility('currentPassword')">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="eye-icon">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="eye-off-icon" style="display:none;">
+                                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <line x1="1" y1="1" x2="23" y2="23" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>New Password</label>
+                            <div class="password-input-container">
+                                <input type="password" id="newPassword" placeholder="Enter new password">
+                                <button type="button" class="password-toggle" onclick="togglePasswordVisibility('newPassword')">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="eye-icon">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="eye-off-icon" style="display:none;">
+                                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <line x1="1" y1="1" x2="23" y2="23" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Confirm New Password</label>
+                            <div class="password-input-container">
+                                <input type="password" id="confirmPassword" placeholder="Confirm new password">
+                                <button type="button" class="password-toggle" onclick="togglePasswordVisibility('confirmPassword')">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="eye-icon">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="eye-off-icon" style="display:none;">
+                                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <line x1="1" y1="1" x2="23" y2="23" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <button type="submit" class="save-btn">Update Account</button>
+                    </form>
+                </div>
+
+                <!-- Events Tab -->
+                <div id="events" class="tab-panel">
+                    <h3>Event Management</h3>
+                    <div class="settings-section">
+                        <h4>Default Event Image</h4>
+                        <div class="image-upload">
+                            <input type="file" id="defaultEventImage" accept="image/*">
+                            <img id="defaultImagePreview" src="" style="display:none; max-width:200px; margin-top:10px;">
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <h4>Event Settings</h4>
+                        <div class="toggle-group">
+                            <label class="toggle">
+                                <input type="checkbox" id="requireApproval">
+                                <span class="slider"></span>
+                                Require admin approval for new events
+                            </label>
+                        </div>
+                        <div class="toggle-group">
+                            <label class="toggle">
+                                <input type="checkbox" id="showEvents">
+                                <span class="slider"></span>
+                                Show events to public
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <h4>Data Management</h4>
+                        <button id="exportEvents" class="action-btn">Export Events (JSON)</button>
+                        <button id="importEvents" class="action-btn">Import Events</button>
+                        <input type="file" id="importFile" accept=".json" style="display:none;">
+                        <button id="clearEvents" class="action-btn danger">Clear All Events</button>
+                    </div>
+                </div>
+
+                <!-- Appearance Tab -->
+                <div id="appearance" class="tab-panel">
+                    <h3>Site Appearance</h3>
+                    <div class="settings-section">
+                        <h4>Logo</h4>
+                        <div class="image-upload">
+                            <input type="file" id="siteLogo" accept="image/*">
+                            <img id="logoPreview" src="" style="display:none; max-width:200px; margin-top:10px;">
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <h4>Theme</h4>
+                        <div class="theme-options">
+                            <label class="radio-option">
+                                <input type="radio" name="theme" value="light" checked>
+                                <span>Light Theme</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="theme" value="dark">
+                                <span>Dark Theme</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <h4>Accent Color</h4>
+                        <input type="color" id="accentColor" value="#206233">
+                    </div>
+                    <button id="saveAppearance" class="save-btn">Save Appearance</button>
+                </div>
+
+                <!-- Security Tab -->
+                <div id="security" class="tab-panel">
+                    <h3>Security Settings</h3>
+                    <div class="settings-section">
+                        <h4>Permissions</h4>
+                        <div class="toggle-group">
+                            <label class="toggle">
+                                <input type="checkbox" id="allowPublicAdd">
+                                <span class="slider"></span>
+                                Allow public to add events
+                            </label>
+                        </div>
+                        <div class="toggle-group">
+                            <label class="toggle">
+                                <input type="checkbox" id="allowPublicEdit">
+                                <span class="slider"></span>
+                                Allow public to edit events
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <h4>Admin Users</h4>
+                        <div class="admin-list" id="adminList">
+                            <!-- Admin users will be listed here -->
+                        </div>
+                        <button id="addAdmin" class="action-btn">Add Admin</button>
+                    </div>
+                    <button id="saveSecurity" class="save-btn">Save Security Settings</button>
+                </div>
+
+                <!-- Notifications Tab -->
+                <div id="notifications" class="tab-panel">
+                    <h3>Notification Settings</h3>
+                    <div class="settings-section">
+                        <h4>Email Notifications</h4>
+                        <div class="toggle-group">
+                            <label class="toggle">
+                                <input type="checkbox" id="emailNewEvents">
+                                <span class="slider"></span>
+                                Notify when new events are added
+                            </label>
+                        </div>
+                        <div class="toggle-group">
+                            <label class="toggle">
+                                <input type="checkbox" id="emailEventChanges">
+                                <span class="slider"></span>
+                                Notify when events are modified
+                            </label>
+                        </div>
+                        <div class="toggle-group">
+                            <label class="toggle">
+                                <input type="checkbox" id="emailDeletions">
+                                <span class="slider"></span>
+                                Notify when events are deleted
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <h4>Notification Email</h4>
+                        <input type="email" id="notificationEmail" placeholder="notifications@example.com">
+                    </div>
+                    <button id="saveNotifications" class="save-btn">Save Notification Settings</button>
+                </div>
+
+                <!-- About Tab -->
+                <div id="about" class="tab-panel">
+                    <h3>About & Support</h3>
+                    <div class="settings-section">
+                        <h4>App Information</h4>
+                        <div class="info-item">
+                            <strong>Version:</strong> 1.0.0
+                        </div>
+                        <div class="info-item">
+                            <strong>Last Updated:</strong> <span id="lastUpdated">Loading...</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Database:</strong> Firebase Firestore
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <h4>Support</h4>
+                        <div class="info-item">
+                            <strong>Contact:</strong> support@navigatecampus.com
+                        </div>
+                        <div class="info-item">
+                            <strong>Documentation:</strong> <a href="#" target="_blank">View Docs</a>
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <h4>System Status</h4>
+                        <div class="status-item">
+                            <span class="status-dot online"></span>
+                            <span>Database Connection: Online</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-dot online"></span>
+                            <span>Firebase Services: Online</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmModal" class="modal-overlay" style="display:none;">
+        <div class="modal-content">
+            <h3 id="confirmTitle">Confirm Action</h3>
+            <p id="confirmMessage">Are you sure you want to proceed?</p>
+            <div class="modal-actions">
+                <button id="confirmYes" class="danger-btn">Yes, Proceed</button>
+                <button id="confirmNo" class="cancel-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/admin-settings.js"></script>
+    <script>
+        function goBackToAdminTools() {
+            window.location.href = "./admin-tools.html";
+        }
+        
+        function togglePasswordVisibility(inputId) {
+            const input = document.getElementById(inputId);
+            const toggleBtn = input.parentElement.querySelector('.password-toggle');
+            const eyeIcon = toggleBtn.querySelector('.eye-icon');
+            const eyeOffIcon = toggleBtn.querySelector('.eye-off-icon');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                eyeIcon.style.display = 'none';
+                eyeOffIcon.style.display = 'block';
+            } else {
+                input.type = 'password';
+                eyeIcon.style.display = 'block';
+                eyeOffIcon.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

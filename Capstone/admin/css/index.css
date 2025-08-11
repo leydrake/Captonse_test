@@ -1,0 +1,172 @@
+body, html {
+    overflow: hidden;
+    height: 100%;
+}
+
+body {
+    background: #d3d3d3;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    
+}
+
+.admin-login-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.admin-login-label {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    color: #888;
+    font-size: 12px;
+}
+
+.login-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    background: #206233;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 0 10px 10px;
+    height: 60px;
+    z-index: 1000;
+    margin-bottom: 0;
+}
+
+.back-btn {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: #fff;
+}
+
+.arrow-left {
+    font-size: 24px;
+}
+
+.login-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.login-form-container {
+    background: #e0e0e0;
+    border-radius: 8px;
+    padding: 32px 24px;
+    width: 320px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0;
+}
+
+.login-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.login-form label {
+    font-size: 14px;
+    margin-bottom: 4px;
+    color: #222;
+}
+
+.login-form input {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background: #fcf9f5;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.password-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-input-container input {
+    flex: 1;
+    padding-right: 50px;
+    margin-bottom: 8px;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    color: #666;
+    border-radius: 4px;
+    transition: color 0.3s;
+}
+
+.password-toggle:hover {
+    color: #206233;
+    background: rgba(32, 98, 51, 0.1);
+}
+
+.password-toggle svg {
+    width: 20px;
+    height: 20px;
+}
+
+.login-btn {
+    background: #206233;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 0;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.2s;
+}
+
+.login-btn:hover {
+    background: #174b25;
+}
+
+.login-btn:disabled {
+    background: #888;
+    cursor: not-allowed;
+}
+
+.error-message {
+    color: #d32f2f;
+    background: #ffebee;
+    border: 1px solid #ffcdd2;
+    border-radius: 4px;
+    padding: 10px;
+    margin-top: 16px;
+    font-size: 14px;
+    text-align: center;
+    display: none;
+    width: 100%;
+    box-sizing: border-box;
+}

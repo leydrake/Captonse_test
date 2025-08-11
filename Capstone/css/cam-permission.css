@@ -1,0 +1,103 @@
+body {
+    background: #d3d3d3;
+    font-family: 'Inter', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .container {
+    width: 100vw;
+    max-width: 430px;
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    
+  }
+  .camera-area {
+    background: #888;
+    width: 95%;
+    max-width: 430px;
+    height: 90vh;
+    min-height: 320px;
+    border-radius: 4px;
+    margin: 16px 0 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .camera-icon {
+    width: 160px;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+  }
+  .bottom-card {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    max-width: 430px;
+    background: #faf7f3;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 28px 0 16px 0;
+    z-index: 100;
+    margin: 0 auto;
+  }
+  .grant-btn {
+    background: #1b5f30;
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    padding: 16px 0;
+    width: 90%;
+    max-width: 420px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+  .grant-btn:hover {
+    background: #3e774f;
+  }
+  .grant-btn svg {
+    width: 28px;
+    height: 28px;
+    fill: none;
+    stroke: #fff;
+    stroke-width: 2;
+  }
+  .permission-msg {
+    color: #888;
+    font-size: 1rem;
+    text-align: center;
+    margin-top: 4px;
+  }
+  @media (max-width: 2000px) {
+    .container, .bottom-card, .camera-area {
+      max-width: 100vw;
+    }
+    .camera-area {
+      min-height: 180px;
+      height: 80vh;
+    }
+  }
