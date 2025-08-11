@@ -189,19 +189,49 @@
       arContainer.style.height = '100%';
       arContainer.style.zIndex = '1000';
       
-      // Add AR scene HTML
+      // Add AR scene HTML with fixed GPS positioning
       arContainer.innerHTML = `
         <a-scene
           vr-mode-ui="enabled: false"
-          arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;"
+          arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false; sourceWidth: 1280; sourceHeight: 720; displayWidth: 1280; displayHeight: 720;"
+          renderer="logarithmicDepthBuffer: true;"
         >
-          <a-text
-            value="This content will always face you."
-            look-at="[gps-camera]"
-            scale="120 120 120"
+          <!-- Fixed GPS marker that won't drag -->
+          <a-box
+            position="0 0 -1"
+            rotation="0 0 0"
+            width="0.5"
+            height="0.5"
+            depth="0.5"
+            color="#FF0000"
             gps-entity-place="latitude: 14.914737810353634; longitude: 120.87128096439201;"
+            gps-entity-place-lock="true"
+            material="shader: flat"
+          ></a-box>
+          
+          <!-- Text label that follows the marker -->
+          <a-text
+            value="Fixed Location Marker"
+            position="0 0.8 -1"
+            scale="0.5 0.5 0.5"
+            color="#FFFFFF"
+            align="center"
+            gps-entity-place="latitude: 14.914737810353634; longitude: 120.87128096439201;"
+            gps-entity-place-lock="true"
+            look-at="[gps-camera]"
           ></a-text>
-          <a-camera gps-camera rotation-reader> </a-camera>
+          
+          <!-- GPS Camera with proper configuration -->
+          <a-camera 
+            gps-camera 
+            rotation-reader
+            gps-camera-rotation-reader
+            gps-camera-position-reader
+            gps-camera-position-min-accuracy="100"
+            gps-camera-position-max-accuracy="1000"
+            gps-camera-position-min-distance="0"
+            gps-camera-position-max-distance="1000"
+          ></a-camera>
         </a-scene>
       `;
       
@@ -209,7 +239,7 @@
       document.body.appendChild(arContainer);
       
       // Update message
-      msgDiv.textContent = 'AR scene is now active! Look around to see AR content.';
+      msgDiv.textContent = 'AR scene is now active! The marker is fixed at the specified coordinates and won\'t drag.';
     }
 
     // Clean up stream when page is unloaded
