@@ -209,11 +209,24 @@
             material="shader: flat"
           ></a-box>
           
+          <!-- Distance display above the marker -->
+          <a-text
+            id="distanceText"
+            value="Calculating distance..."
+            position="0 1.2 -1"
+            scale="0.4 0.4 0.4"
+            color="#00FF00"
+            align="center"
+            gps-entity-place="latitude: 14.914737810353634; longitude: 120.87128096439201;"
+            gps-entity-place-lock="true"
+            look-at="[gps-camera]"
+          ></a-text>
+          
           <!-- Text label that follows the marker -->
           <a-text
-            value="Fixed Location Marker"
+            value="Target Location"
             position="0 0.8 -1"
-            scale="0.5 0.5 0.5"
+            scale="0.3 0.3 0.3"
             color="#FFFFFF"
             align="center"
             gps-entity-place="latitude: 14.914737810353634; longitude: 120.87128096439201;"
@@ -238,8 +251,80 @@
       // Add AR container to body
       document.body.appendChild(arContainer);
       
+      // Start distance calculation
+      startDistanceCalculation();
+      
       // Update message
-      msgDiv.textContent = 'AR scene is now active! The marker is fixed at the specified coordinates and won\'t drag.';
+      msgDiv.textContent = 'AR scene is now active! The marker is fixed at the specified coordinates and shows real-time distance.';
+    }
+
+    function startDistanceCalculation() {
+      // Target coordinates
+      const targetLat = 14.914737810353634;
+      const targetLng = 120.87128096439201;
+      
+      // Function to calculate distance between two GPS coordinates
+      function calculateDistance(lat1, lon1, lat2, lon2) {
+        const R = 6371; // Earth's radius in kilometers
+        const dLat = (lat2 - lat1) * Math.PI / 180;
+        const dLon = (lon2 - lon1) * Math.PI / 180;
+        const a = 
+          Math.sin(dLat/2) * Math.sin(dLat/2) +
+          Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+          Math.sin(dLon/2) * Math.sin(dLon/2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        const distance = R * c; // Distance in kilometers
+        return distance;
+      }
+      
+      // Function to update distance display
+      function updateDistance() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            function(position) {
+              const currentLat = position.coords.latitude;
+              const currentLng = position.coords.longitude;
+              const distance = calculateDistance(currentLat, currentLng, targetLat, targetLng);
+              
+              // Format distance display
+              let distanceText = '';
+              if (distance < 1) {
+                distanceText = `${(distance * 1000).toFixed(0)}m away`;
+              } else {
+                distanceText = `${distance.toFixed(2)}km away`;
+              }
+              
+              // Update the distance text in the AR scene
+              const distanceElement = document.querySelector('#distanceText');
+              if (distanceElement) {
+                distanceElement.setAttribute('value', distanceText);
+              }
+              
+              // Also update the debug info
+              const deviceInfo = document.querySelector('#deviceInfo');
+              if (deviceInfo) {
+                deviceInfo.textContent = `Distance: ${distanceText}`;
+              }
+            },
+            function(error) {
+              console.error('Error getting current position:', error);
+              const distanceElement = document.querySelector('#distanceText');
+              if (distanceElement) {
+                distanceElement.setAttribute('value', 'GPS unavailable');
+              }
+            },
+            {
+              enableHighAccuracy: true,
+              timeout: 10000,
+              maximumAge: 60000
+            }
+          );
+        }
+      }
+      
+      // Update distance immediately and then every 3 seconds
+      updateDistance();
+      setInterval(updateDistance, 3000);
     }
 
     // Clean up stream when page is unloaded
